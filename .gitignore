@@ -17,6 +17,8 @@ docs/_build/
 de-en.tmx
 
 node_modules
+logs
+
 
 .data
 .docker/logs
