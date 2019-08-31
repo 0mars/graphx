@@ -1,8 +1,9 @@
 import falcon
-from injector_provider.providers import InjectorProvider
 from graphx.configurations.app import settings
 from graphx.configurations.app.middlewares import RequireJSON
 from falcon_marshmallow import Marshmallow
+
+from injector_provider import InjectorProvider
 from registry.services import Container, Registry
 
 app = falcon.API(middleware=[
