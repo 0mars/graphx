@@ -9,7 +9,7 @@ from falcon.response import Response
 from falcon_apispec import FalconPlugin
 
 
-from graphx.entrypoints.rest.health import HealthSchema, HealthCheck
+from graphx.configurations.infrastructure.rest.health import HealthSchema, HealthCheck
 
 
 class SwaggerResource:

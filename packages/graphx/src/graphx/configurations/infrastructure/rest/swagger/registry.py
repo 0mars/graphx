@@ -7,7 +7,7 @@ from falcon_swagger_ui import register_swaggerui_app
 class SwaggerService(BootableService):
     def boot(self, container: Container):
         from graphx.configurations.app import settings
-        from graphx.entrypoints.rest.swagger import SwaggerResource
+        from graphx.configurations.infrastructure.rest.swagger import SwaggerResource
 
         falcon = container.get(settings.Props.FALCON)
         swagger_resource = SwaggerResource(container.get(settings.Props.DI_PROVIDER))

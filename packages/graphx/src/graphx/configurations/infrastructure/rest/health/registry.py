@@ -1,7 +1,7 @@
 from graphx.configurations.app import settings
-from graphx.entrypoints.rest.health.definitions import HealthConfigurator
+from graphx.configurations.infrastructure.rest.health.definitions import HealthConfigurator
 from registry.services import BootableService, Container
-from graphx.entrypoints.rest.health import HealthCheck
+from graphx.configurations.infrastructure.rest.health import HealthCheck
 
 
 class HealthService(BootableService):

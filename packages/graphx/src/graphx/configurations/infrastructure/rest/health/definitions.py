@@ -1,4 +1,4 @@
-from graphx.entrypoints.rest.health import HealthCheck
+from graphx.configurations.infrastructure.rest.health import HealthCheck
 from injector import Module, singleton, provider
 
 
