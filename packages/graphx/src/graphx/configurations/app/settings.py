@@ -1,8 +1,8 @@
 from graphx.configurations.infrastructure.db import DataBaseService
 from graphx.configurations.infrastructure.environment import EnvironmentService
 from graphx.configurations.infrastructure.logging import LoggingService
-from graphx.entrypoints.rest.health.registry import HealthService
-from graphx.entrypoints.rest.swagger.registry import SwaggerService
+from graphx.configurations.infrastructure.rest.health.registry import HealthService
+from graphx.configurations.infrastructure.rest.swagger.registry import SwaggerService
 from registry.services import Props as BaseProps
 
 services = [

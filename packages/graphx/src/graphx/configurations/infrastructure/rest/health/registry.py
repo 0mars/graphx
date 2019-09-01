@@ -14,5 +14,5 @@ class HealthService(BootableService):
         injector = provider.get_injector()
 
         health_check = injector.get(HealthCheck)
-        falcon.add_route("/api", health_check)
-        falcon.add_route("/api/health", health_check)
+        falcon.add_route("/v1", health_check)
+        falcon.add_route("/v1/health", health_check)
