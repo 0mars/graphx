@@ -9,6 +9,6 @@ class Node:
 
 @dataclass
 class Edge:
-    source: Node
-    destination: Node
+    source: str
+    destination: str
     cost: int

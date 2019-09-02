@@ -1,6 +1,6 @@
 from graphx.configurations.app import settings
 from graphx.core.rest.definitions import NodeConfigurator
-from graphx.core.rest.resources import NodeCollection
+from graphx.core.rest.resources import NodeCollection, EdgeCollection
 from registry.services import BootableService, Container
 
 
@@ -13,3 +13,4 @@ class NodeService(BootableService):
         injector = provider.get_injector()
 
         falcon.add_route("/v1/nodes", injector.get(NodeCollection))
+        falcon.add_route("/v1/edges", injector.get(EdgeCollection))

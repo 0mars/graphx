@@ -16,4 +16,8 @@ class Node(Schema):
         return object
 
 
-
+class Edge(Schema):
+    """Edge schema"""
+    source = fields.String()
+    destination = fields.String()
+    cost = fields.Integer()

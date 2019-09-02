@@ -8,12 +8,12 @@ from falcon.response import Response
 from falcon_apispec import FalconPlugin
 
 
-from graphx.core.rest.resources import NodeCollection
-from graphx.core.rest.schemas import Node
+from graphx.core.rest.resources import NodeCollection, EdgeCollection
+from graphx.core.rest.schemas import Node, Edge
 
 
 class SwaggerResource:
-    def __init__(self, injector):
+    def __init__(self):
         from graphx.configurations.app.settings import Props
         from graphx.configurations.app.main import app
         from graphx.configurations.app.main import container
@@ -29,6 +29,9 @@ class SwaggerResource:
 
         self.spec.components.schema('Node', schema=injector.get(Node))
         self.spec.path(resource=injector.get(NodeCollection))
+
+        self.spec.components.schema('Edge', schema=injector.get(Edge))
+        self.spec.path(resource=injector.get(EdgeCollection))
 
     def on_get(self, req: Request, resp: Response):
         resp.status = falcon.HTTP_200
