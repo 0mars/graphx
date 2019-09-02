@@ -1,15 +1,15 @@
 from graphx.configurations.infrastructure.db import DataBaseService
 from graphx.configurations.infrastructure.environment import EnvironmentService
 from graphx.configurations.infrastructure.logging import LoggingService
-from graphx.configurations.infrastructure.rest.health.registry import HealthService
 from graphx.configurations.infrastructure.rest.swagger.registry import SwaggerService
+from graphx.core.rest.registry import NodeService
 from registry.services import Props as BaseProps
 
 services = [
     LoggingService(),
     EnvironmentService(),
     DataBaseService(),
-    HealthService(),
+    NodeService(),
     SwaggerService()
 ]
 

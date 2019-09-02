@@ -2,9 +2,10 @@ from abc import ABCMeta, abstractmethod
 from typing import Generic, TypeVar, Any
 
 N = TypeVar('N')
+E = TypeVar('E')
 
 
-class DataProvider(Generic[N], metaclass=ABCMeta):
+class DataProvider(Generic[N, E], metaclass=ABCMeta):
     @abstractmethod
     def save(self, node: N) -> None:
         """ ads a node to the graph
@@ -16,11 +17,12 @@ class DataProvider(Generic[N], metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def add_edge(self, source: N, destination: N) -> None:
+    def add_edge(self, edge: E) -> None:
         """ ads an edge
                 Args:
                     source: source node
                     destination: destination node
+                    cost: cost of distance
                 Returns:
                     None
                 """

@@ -1,14 +1,15 @@
 import falcon
 from graphx.configurations.app import settings
-from graphx.configurations.app.middlewares import RequireJSON
-from falcon_marshmallow import Marshmallow
+from falcon_marshmallow import JSONEnforcer, EmptyRequestDropper
 
+from graphx.configurations.app.middlewares import RequestLoader
 from injector_provider import InjectorProvider
 from registry.services import Container, Registry
 
 app = falcon.API(middleware=[
-    RequireJSON(),
-    Marshmallow()
+    JSONEnforcer(),
+    EmptyRequestDropper(),
+    RequestLoader()
 ])
 
 container = Container()
