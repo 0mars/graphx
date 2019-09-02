@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Any, List, Dict
 
-from graphx.core.data_providers.data_provider import DataProvider
+from graphx.core.data_providers.data_provider import DataProvider, N
 from graphx.core.entities import Edge, Node
 from graphx.core.exceptions import EntityAlreadyExistsException
 
@@ -19,6 +19,9 @@ class MemoryNodeRepository(DataProvider[Node, Edge]):
     def add_edge(self, edge: Edge) -> None:
         # todo handle duplicates
         pass
+
+    def find_all_nodes(self) -> List[Node]:
+        return [v for k, v in self.nodes.items()]
 
     def find_by_id(self, id: str) -> Node:
         pass
