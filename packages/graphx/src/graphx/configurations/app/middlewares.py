@@ -34,17 +34,13 @@ class HTTPValidationError(falcon.HTTPError):
 class RequestLoader(Marshmallow):
     def process_resource(self, *args, **kwargs):
         try:
-            # super().process_resource(*args, **kwargs)
-            self.xx(*args, **kwargs)
+            self.process_resource_inner(*args, **kwargs)
         except ValidationError as err:
             raise HTTPValidationError(status=falcon.status_codes.HTTP_400, errors=err.messages)
         except ValueError as err:
             raise falcon.HTTPError(status=falcon.status_codes.HTTP_400, title='Validation Error', description=str(err))
 
-    def process_response(self, req, resp, resource, req_succeeded):
-        return
-
-    def xx(self, req, resp, resource, params):
+    def process_resource_inner(self, req, resp, resource, params):
         # type: (Request, Response, object, dict) -> None
         """Deserialize request body with any resource-specific schemas
 
@@ -95,7 +91,7 @@ class RequestLoader(Marshmallow):
             log.info(sch)
 
             # commented out by Omar
-            # bug here override for now
+            # resolves a bug in marshmallow falcon, needs further investigation
             # data, errors = sch.load(parsed)
 
             errors = None
