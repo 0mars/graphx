@@ -37,7 +37,7 @@ install:
 	pip install -r requirements-dev.txt
 
 run:
-	@cd src; gunicorn -b 0.0.0.0:8000 graphx.configurations.app.main:app --reload && echo "success!" || { echo "Crashed!"; exit 0; }
+	@cd src; gunicorn -b 0.0.0.0:8000 graphx.configurations.app.main:app -w 1 -k gevent --reload && echo "success!" || { echo "Crashed!"; exit 0; }
 
 test:
 	pipenv run py.test -s
