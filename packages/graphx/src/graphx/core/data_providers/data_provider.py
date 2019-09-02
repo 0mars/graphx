@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Generic, TypeVar, Any
+from typing import Generic, TypeVar, Any, List
 
 N = TypeVar('N')
 E = TypeVar('E')
@@ -13,6 +13,14 @@ class DataProvider(Generic[N, E], metaclass=ABCMeta):
                     node (N): The node entity
                 Returns:
                     None
+        """
+        pass
+
+    @abstractmethod
+    def find_all_nodes(self) -> List[N]:
+        """ returns a list of nodes
+                Returns:
+                    List[N] list of nodes
         """
         pass
 
