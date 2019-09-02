@@ -19,6 +19,14 @@ class NodeCollection(object):
         self.find_all_nodes = find_all_nodes
 
     def on_post(self, req, resp):
+        """
+            ---
+                           summary: Add a node
+                           responses:
+                               201:
+                                   description: Created
+                                   schema: Node
+        """
         node_resource = req.context['json']
 
         node = Node(id=node_resource['id'], name=node_resource['name'])
@@ -31,6 +39,13 @@ class NodeCollection(object):
             resp.status = falcon.status_codes.HTTP_422
 
     def on_get(self, req, resp):
+        """
+            ---
+                           summary: Find all nodes
+                           responses:
+                               200:
+                                   description: OK
+        """
         nodes = self.find_all_nodes.execute()
         schema = NodeSchema(many=True)
         result = schema.dump(NodeAssembler.assemble_collection(nodes))  # OR UserSchema().dump(users, many=True)
