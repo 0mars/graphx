@@ -13,6 +13,8 @@ class GraphConfigurator(Module):
     @singleton
     @provider
     def provide_graph(self) -> Graph:
-        graph = Graph(uri=self.url, user=self.username, password=self.password)
-        graph.begin()
-        return graph
+        # graph = Graph(uri=self.url, user=self.username, password=self.password)
+        graph = Graph("http://neo4j:7474/db/data/", user=self.username, password=self.password)
+        # graph.create()
+        return graph.begin()
+        # return graph

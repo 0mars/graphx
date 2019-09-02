@@ -1,5 +1,4 @@
 import json
-from typing import List
 
 import falcon
 from apispec import APISpec
@@ -9,7 +8,8 @@ from falcon.response import Response
 from falcon_apispec import FalconPlugin
 
 
-from graphx.configurations.infrastructure.rest.health import HealthSchema, HealthCheck
+from graphx.core.rest.resources import NodeCollection
+from graphx.core.rest.schemas import Node
 
 
 class SwaggerResource:
@@ -27,9 +27,8 @@ class SwaggerResource:
                             ])
         injector = container.get(Props.DI_PROVIDER).get_injector()
 
-        # todo: should somehow make a list of schemas, and resources
-        self.spec.components.schema('Health', schema=injector.get(HealthSchema))
-        self.spec.path(resource=injector.get(HealthCheck))
+        self.spec.components.schema('Node', schema=injector.get(Node))
+        self.spec.path(resource=injector.get(NodeCollection))
 
     def on_get(self, req: Request, resp: Response):
         resp.status = falcon.HTTP_200

@@ -1,11 +1,14 @@
-from py2neo.ogm import GraphObject, Property, RelatedTo
+from attr import dataclass
 
 
-class Node(GraphObject):
-    __primarykey__ = "id"
+@dataclass
+class Node:
+    id: str
+    name: str
 
-    id = Property()
-    name = Property()
 
-    edges = RelatedTo('Node')
-
+@dataclass
+class Edge:
+    source: Node
+    destination: Node
+    cost: int
