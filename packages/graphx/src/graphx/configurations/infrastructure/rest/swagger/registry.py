@@ -10,7 +10,7 @@ class SwaggerService(BootableService):
         from graphx.configurations.infrastructure.rest.swagger import SwaggerResource
 
         falcon = container.get(settings.Props.FALCON)
-        swagger_resource = SwaggerResource(container.get(settings.Props.DI_PROVIDER))
+        swagger_resource = SwaggerResource()
         falcon.add_route('/v1/swagger.json', swagger_resource)
 
         page_title = 'Swagger UI'
