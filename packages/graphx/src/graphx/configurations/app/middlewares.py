@@ -90,17 +90,7 @@ class RequestLoader(Marshmallow):
                 raise HTTPBadRequest('Request must be valid JSON')
             log.info(sch)
 
-            # commented out by Omar
-            # resolves a bug in marshmallow falcon, needs further investigation
-            # data, errors = sch.load(parsed)
-
-            errors = None
-            data = parsed
-
-            if errors:
-                raise HTTPUnprocessableEntity(
-                    description=self._json.dumps(errors)
-                )
+            data = sch.load(parsed)
 
             req.context[self._req_key] = data
 
