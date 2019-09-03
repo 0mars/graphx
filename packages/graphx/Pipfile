@@ -18,6 +18,7 @@ injector = "*"
 pipenv-to-requirements = "*"
 falcon-marshmallow = "*"
 py2neo = "==3.1.2"
+requests = "*"
 
 [dev-packages]
 pytest = "*"
