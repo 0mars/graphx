@@ -4,6 +4,7 @@ from graphx.core.data_providers.memory import MemoryNodeRepository
 from graphx.core.rest.resources import NodeCollection, EdgeCollection
 from graphx.core.use_cases import AddNode
 from graphx.core.use_cases.add_edge import AddEdge
+from graphx.core.use_cases.find_all_edges import FindAllEdges
 from graphx.core.use_cases.find_all_nodes import FindAllNodes
 
 
@@ -16,7 +17,7 @@ class NodeConfigurator(Module):
     @singleton
     @provider
     def edge_collection(self) -> EdgeCollection:
-        return EdgeCollection(self.__injector__.get(AddEdge))
+        return EdgeCollection(self.__injector__.get(AddEdge), self.__injector__.get(FindAllEdges))
 
     @singleton
     @provider

@@ -6,11 +6,12 @@ import falcon
 from graphx.core.data_providers.memory import Node
 from graphx.core.entities import Edge
 from graphx.core.exceptions import EntityAlreadyExistsException
-from graphx.core.rest.assemblers import NodeAssembler
+from graphx.core.rest.assemblers import NodeAssembler, EdgeAssembler
 from graphx.core.rest.schemas import Node as NodeSchema
 from graphx.core.rest.schemas import Edge as EdgeSchema
 from graphx.core.use_cases import AddNode
 from graphx.core.use_cases.add_edge import AddEdge
+from graphx.core.use_cases.find_all_edges import FindAllEdges
 from graphx.core.use_cases.find_all_nodes import FindAllNodes
 
 
@@ -60,8 +61,9 @@ class NodeCollection(object):
 class EdgeCollection(object):
     schema = EdgeSchema()
 
-    def __init__(self, add_edge: AddEdge):
-        self.add_edge = add_edge
+    def __init__(self, add_edge: AddEdge, find_all_edges: FindAllEdges):
+        self.add_use_case = add_edge
+        self.find_all_use_case = find_all_edges
 
     def on_post(self, req, resp):
         """
@@ -76,9 +78,24 @@ class EdgeCollection(object):
 
         edge = Edge(edge_resource['source'], edge_resource['destination'], edge_resource['cost'])
         try:
-            self.add_edge.execute(edge)
+            self.add_use_case.execute(edge)
             resp.body = json.dumps(edge_resource)
             resp.status = falcon.status_codes.HTTP_201
         except EntityAlreadyExistsException:
             # todo response error body
             resp.status = falcon.status_codes.HTTP_422
+
+    def on_get(self, req, resp):
+        """
+            ---
+                           summary: Find all edges
+                           responses:
+                               200:
+                                   description: OK
+        """
+        edges = self.find_all_use_case.execute()
+        schema = EdgeSchema(many=True)
+        result = schema.dump(EdgeAssembler.assemble_collection(edges))  # OR UserSchema().dump(users, many=True)
+        resp.body = json.dumps(result)
+
+        resp.status = falcon.status_codes.HTTP_200

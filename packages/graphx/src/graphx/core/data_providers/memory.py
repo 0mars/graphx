@@ -1,4 +1,3 @@
-import logging
 from dataclasses import dataclass, field
 from typing import Any, List, Dict
 
@@ -17,14 +16,23 @@ class MemoryNodeRepository(DataProvider[Node, Edge]):
         self.nodes[node.id] = node
 
     def add_edge(self, edge: Edge) -> None:
-        # todo handle duplicates
+        if self.edge_exists(edge):
+            raise EntityAlreadyExistsException('Edge already exists')
         self.edges.append(edge)
+
+    def edge_exists(self, edge: Edge):
+        # todo shall only compare source and dest
+        duplicates = [existing_edge for existing_edge in self.edges if edge == existing_edge]
+        return len(duplicates) > 0
 
     def find_all_nodes(self) -> List[Node]:
         return [v for k, v in self.nodes.items()]
 
     def find_by_id(self, id: str) -> Node:
         pass
+
+    def find_all_edges(self) -> List[Edge]:
+        return self.edges
 
     def find_shortest_path(self, source: Node, destination: Node) -> Any:
         pass
