@@ -21,3 +21,11 @@ class Edge(Schema):
     source = fields.String()
     destination = fields.String()
     cost = fields.Integer()
+
+    @classmethod
+    def from_domain_object(cls, edge):
+        object = cls()
+        object.source = edge.source
+        object.destination = edge.destination
+        object.cost = edge.cost
+        return object
